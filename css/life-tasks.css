@@ -1,0 +1,32 @@
+.f13-tasks-complete { display: block; margin: -7px -6px; padding: 7px; background: #ccffcc; }
+.f13-tasks-incomplete { display: block; margin: -7px -6px; padding: 7px; background: #ffcccc; }
+.f13-tasks-progress { width: 100%;   -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;}
+
+/*.f13-data-progress-bar { border-right: 1px solid #bbb;
+    background: repeating-linear-gradient(
+        45deg,
+        #ccffcc,
+        #ccffcc 10px,
+        #99ff99 10px,
+        #99f999 20px
+      ); 
+      animation: barberpole 10s linear infinite;
+}
+@keyframes barberpole {
+  100% {
+    background-position: 100% 100%;
+  }
+}*/
+
+#f13-life-tasks-daily .f13-data-progress-bar, #f13-life-tasks-weekly .f13-data-progress-bar, #f13-life-tasks-monthly .f13-data-progress-bar { background-image: repeating-linear-gradient( 45deg, #ccffcc, #ccffcc 10px, #99ff99 1rem,#99ff99 2rem ); background-size: 90px 90px; animation: barberpole 40s linear infinite; border-right: 1px solid #aaa; }
+@keyframes barberpole { 100% { background-position: 100% 100%; } }
+#f13-life-tasks-daily .f13-data-progress-text,
+#f13-life-tasks-weekly .f13-data-progress-text,
+#f13-life-tasks-monthly .f13-data-progress-text {
+  font-weight: bold;
+}
+
+.f13-life-tasks-edit-task { width: 500px; height: 450px; }
+.life-tasks-btn-new { text-decoration: none; font-size: 26px; margin-top: -11px; margin-right: 3px; }
+#life-tasks-user-select { width: 100%; border-radius: 0px; font-size: 16px; padding: 8px; background: #f6f6f6; border: 1px solid #aaa; }

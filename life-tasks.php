@@ -73,7 +73,7 @@ class Plugin
     {
         wp_enqueue_style('f13-tasks', F13_LIFE_TASKS_URL.'css/life-tasks.css', array(), F13_LIFE_TASKS['Version']);
         wp_enqueue_script('f13-tasks', F13_LIFE_TASKS_URL.'js/life-tasks.js', array('jquery'), F13_LIFE_TASKS['Version']);
-
+        wp_localize_script('f13-tasks', 'plugin_url', F13_LIFE_TASKS_URL);
     }
 }
 

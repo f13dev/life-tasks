@@ -213,6 +213,13 @@ class Control
                 'text' => __('Error: Could not save data', 'life-tasks'),
                 'type' => 'error',
             ));
+
+            return $msg;
+        }
+
+        // Check completion percentage
+        if ($m->get_count_tasks_period($frequency) == 0) {
+            $msg .= '<div id="f13-life-tasks-success"></div>';
         }
 
         return $msg.'<div class="f13-data-refresh-form" data-form="f13-life-tasks-'.$frequency.'"></div>';

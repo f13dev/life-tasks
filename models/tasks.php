@@ -126,33 +126,36 @@ class Tasks
         return $this->wpdb->query($this->wpdb->prepare($sql, $id, $start));
     }
 
+    public function get_count_tasks_period($period) 
+    {
+        switch ($period) {
+            case 'weekly':
+                $start = F13_LIFE_TASKS_WEEK_START;
+                break;
+            case 'monthly':
+                $start = F13_LIFE_TASKS_MONTH_START;
+                break;
+            default:
+                $start = F13_LIFE_TASKS_DAY_START;
+        }
+        $sql = "SELECT count(db.id)
+                FROM ".F13_LIFE_DB_TASKS." db
+                LEFT JOIN ".F13_LIFE_DB_TASK_COMPLETION." AS tc ON (tc.task_id = db.id AND tc.period_start = %d)
+                WHERE (db.user_id = '".get_current_user_id()."' || db.user_id = '0')
+                AND db.frequency = %s
+                AND tc.timestamp IS NULL;";
+
+        return $this->wpdb->get_var($this->wpdb->prepare($sql, $start, $period));
+
+    }
+
     public function get_count_tasks_today()
     {
-        $sql = "SELECT count(db.id)
-                FROM ".F13_LIFE_DB_TASKS." db
-                LEFT JOIN ".F13_LIFE_DB_TASK_COMPLETION." AS tc ON (tc.task_id = db.id AND tc.period_start = '".F13_LIFE_TASKS_DAY_START."')
-                WHERE (db.user_id = '".get_current_user_id()."' || db.user_id = '0')
-                AND db.frequency = 'daily'
-                AND tc.timestamp IS NULL;";
-        $daily = $this->wpdb->get_var($sql);
+        $daily = $this->get_count_tasks_period('daily');
+        $weekly = $this->get_count_tasks_period('weekly');
+        $monthly = $this->get_count_tasks_period('monthly');
 
-        $sql = "SELECT count(db.id)
-                FROM ".F13_LIFE_DB_TASKS." db
-                LEFT JOIN ".F13_LIFE_DB_TASK_COMPLETION." AS tc ON (tc.task_id = db.id AND tc.period_start = '".F13_LIFE_TASKS_WEEK_START."')
-                WHERE (db.user_id = '".get_current_user_id()."' || db.user_id = '0')
-                AND db.frequency = 'weekly'
-                AND tc.timestamp IS NULL;";
-        $weekly = $this->wpdb->get_var($sql);
-
-        $sql = "SELECT count(db.id)
-                FROM ".F13_LIFE_DB_TASKS." db
-                LEFT JOIN ".F13_LIFE_DB_TASK_COMPLETION." AS tc ON (tc.task_id = db.id AND tc.period_start = '".F13_LIFE_TASKS_MONTH_START."')
-                WHERE (db.user_id = '".get_current_user_id()."' || db.user_id = '0')
-                AND db.frequency = 'monthly'
-                AND tc.timestamp IS NULL;";
-        $month = $this->wpdb->get_var($sql);
-
-        return $daily + $weekly + $month;
+        return $daily + $weekly + $monthly;
     }
 
     public function _get_list_my_tasks_for_period($user_id, $frequency, $period_start) 

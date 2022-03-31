@@ -4,7 +4,6 @@ class Tasks
 {
     public $label_complete;
     public $label_complete_title;
-    public $label_completed_by;
     public $label_daily;
     public $label_delete;
     public $label_delete_confirm;
@@ -23,6 +22,7 @@ class Tasks
     public $label_reset_confirm;
     public $label_reset_title;
     public $label_save;
+    public $label_signed;
     public $label_task;
     public $label_user;
     public $label_weekly;
@@ -31,7 +31,6 @@ class Tasks
     {
         $this->label_complete       = __('Complete', 'life-tasks');
         $this->label_complete_title = __('Mark task as complete', 'life-tasks');
-        $this->label_completed_by   = __('Completed by', 'f13-tasks');
         $this->label_daily          = __('Daily', 'life-tasks');
         $this->label_delete         = __('Delete', 'life-tasks');
         $this->label_delete_confirm = __('Do you really want to delete this task?', 'life-tasks');
@@ -50,6 +49,7 @@ class Tasks
         $this->label_reset_confirm  = __('Do you really want to reset this tasks completion?', 'life-tasks');
         $this->label_reset_title    = __('Reset completion', 'life-tasks');
         $this->label_save           = __('Save', 'life-tasks');
+        $this->label_signed         = __('Signed', 'life-tasks');
         $this->label_task           = __('Task', 'life-tasks');
         $this->label_user           = __('User', 'life-tasks');
         $this->label_weekly         = __('Weekly', 'life-tasks');
@@ -104,8 +104,8 @@ class Tasks
                 array(
                     'col' => 'signed_user_login',
                     'db' => 'u2.user_login',
-                    'title' => $this->label_completed_by,
-                    'callback' => array($this, 'callback_completed_by'),
+                    'title' => $this->label_signed,
+                    'callback' => array($this, 'callback_signed'),
                     'width' => '15%',
                     'dropdown' => array(
                         'NULL' => $this->label_incomplete,
@@ -173,7 +173,7 @@ class Tasks
         return 'X';
     }
 
-    public function callback_completed_by($row)
+    public function callback_signed($row)
     {
         if ($row->signed_user_login) {
             return '<span class="f13-tasks-complete">'.ucfirst($row->signed_user_login).'</span>';
@@ -340,6 +340,13 @@ class Tasks
         $v .= '<div class="f13-life-tasks-daily-table">'.$this->_tasks_for_period('daily').'</div>';
         $v .= '<div class="f13-life-tasks-weekly-table">'.$this->_tasks_for_period('weekly').'</div>';
         $v .= '<div class="f13-life-tasks-monthly-table">'.$this->_tasks_for_period('monthly').'</div>';
+
+        return $v;
+    }
+
+    public function success()
+    {
+        $v = '<div id="f13-life-tasks-success"></div>';
 
         return $v;
     }

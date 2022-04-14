@@ -1,5 +1,5 @@
 (function($) {
-    $(document).on('change','#life-tasks-user-select', function() {
+    $(document).on('change','#life-tasks-user-select, #life-tasks-start-time-select', function() {
         $(this).closest("form").submit();
     });
 
@@ -25,5 +25,16 @@
 
     $(document).ready(function() {
         remove_success();
+    });
+
+    $(document).on('mouseover', '.task-completion ', function() {
+        var hover = $(this).children('.hover');
+        var row = $(this).closest('.task-row');
+        if (hover.position().left + hover.width() > row.position().left + row.width()) {
+            hover.css('right', row.position().left);
+        } else 
+        if (hover.position().left < row.position().left) {
+            hover.css('left', row.position().left);
+        }
     });
 })(jQuery);

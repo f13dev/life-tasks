@@ -40,6 +40,7 @@ class Plugin
         add_action('wp_enqueue_scripts', array($this, 'enqueue'));
 
         new Controllers\Control();
+        new Controllers\Report();
 
         if (defined('DOING_AJAX') && DOING_AJAX) {
             new Controllers\Ajax();

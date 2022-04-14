@@ -29,7 +29,7 @@
 
 .f13-life-tasks-edit-task { width: 500px; height: 450px; }
 .life-tasks-btn-new { text-decoration: none; font-size: 26px; margin-top: -11px; margin-right: 3px; }
-#life-tasks-user-select { width: 100%; border-radius: 0px; font-size: 16px; padding: 8px; background: #eee; border: 1px solid #aaa; }
+#life-tasks-user-select, #life-tasks-start-time-select { width: 100%; border-radius: 0px; font-size: 16px; padding: 8px; background: #eee; border: 1px solid #aaa; }
 
 @media screen and (max-width: 753px) {
   .f13-data-table td .f13-tasks-incomplete,
@@ -37,18 +37,6 @@
     display: inline-block;
     position: relative;
     width: calc(100vw - 135px);
-  }
-}
-
-@media screen and (max-width: 800px) {
-  #life-tasks-user-select {
-    margin-top: 40px;
-  }
-}
-
-@media screen and (max-width: 782px) {
-  #life-tasks-user-select {
-    margin-top: 25px;
   }
 }
 
@@ -62,4 +50,114 @@
   top: 0;
   left: 0;
   z-index: 9999;
+}
+
+
+.f13-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: calc(100% + 20px);
+  margin: 0px -10px;
+}
+
+.f13-col-6 {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  padding: 5px 10px;
+  min-width: 250px;
+}
+
+@media screen and (max-width: 800px) {
+  .f13-row {
+    margin-top: 40px;
+  }
+}
+
+@media screen and (max-width: 782px) {
+  .f13-row {
+    margin-top: 25px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .f13-col-6 {
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.task-row {
+  border: 1px solid #ccc;
+  border-left: 0px;
+  border-bottom:0px;
+}
+
+.task-row-dates {
+  border: 0px;
+}
+
+.task-completion-complete {
+  background-color: #ccffcc;
+}
+
+.task-completion {
+  height: 30px; 
+  display: inline-block;
+  box-sizing: border-box;
+  border-left: 1px solid #ccc;
+  margin-bottom: -4px;
+  border-bottom: 1px solid #ccc;
+}
+
+.task-completion:hover {
+  background: #eee;
+  cursor: help; 
+}
+
+.task-completion-complete:hover {
+  background: #99ff99;
+}
+
+.task-completion-date:hover {
+  background: unset;
+  cursor: auto;
+}
+
+.task-completion .hover {
+  position: absolute;
+  width: 200px;
+  display: none;
+  background: #fff;
+  border: 1px solid #ccc;
+  margin-top: 33px;
+  z-index: 9999;
+  margin-left: -1px;
+  padding: 5px;
+  box-shadow: 0px 0px 10px #ccc;
+}
+
+.task-completion:hover .hover {
+  display: block;
+}
+
+.task-completion-date {
+  height: 120px;
+  border: 0px;
+}
+
+.task-completion-date span {
+  transform: rotate(69deg);
+  transform-origin: left;
+  display: block;
+  white-space: nowrap;
+  margin-left: 50%;
+}
+
+@media screen and (max-width: 800px) {
+  .task-completion-date:nth-of-type(odd) {
+    visibility:hidden;
+  }
 }

@@ -70,7 +70,9 @@ class Tasks
 
     public function _tasks_for_period($period)
     {
+        $class = 'f13-data-table-'.$period;
         return \F13_table(array(
+            'class_name' => $class,
             'data' => $this->data->{$period},
             'head' => \F13_popup(array(
                 'label' => '<span class="dashicons dashicons-plus-alt life-tasks-btn-new"></span>',
@@ -110,7 +112,8 @@ class Tasks
                     'dropdown' => array(
                         'NULL' => $this->label_incomplete,
                         '>0' => $this->label_complete,
-                    )
+                    ),
+                    'no_sort' => true,
                 ),
                 array(
                     'col' => 'update',

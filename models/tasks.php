@@ -160,7 +160,7 @@ class Tasks
 
     public function _get_list_my_tasks_for_period($user_id, $frequency, $period_start) 
     {
-        return \F13_list(array(
+        $list = \F13_list(array(
             'columns' => array(
                 'db.id',
                 'db.task',
@@ -184,7 +184,33 @@ class Tasks
             'order_by' => array(
                 'db.task ASC',
             ),
+            'group_by' => array(
+                'db.id',
+            ),
             'limit' => 0,
+            'progress' => 'u2.user_login',
         ));
+        
+        return $list;
+    }
+
+    public function select_all_tasks()
+    {
+        $sql = "SELECT db.id, db.task, db.user_id, db.frequency, u.user_login
+                FROM ".F13_LIFE_DB_TASKS." db
+                LEFT JOIN ".$this->wpdb->base_prefix."users AS u ON (u.ID = db.user_id)
+                ORDER BY db.id;";
+        
+        return $this->wpdb->get_results($sql);
+    }
+
+    public function select_all_completion()
+    {
+        $sql = "SELECT db.id, db.task_id, db.user_id, db.timestamp, db.period_start, db.complete, u.user_login
+                FROM ".F13_LIFE_DB_TASK_COMPLETION." db
+                LEFT JOIN ".$this->wpdb->base_prefix."users AS u ON (u.id = db.user_id)
+                ORDER BY db.period_start;";
+        
+        return $this->wpdb->get_results($sql);
     }
 }

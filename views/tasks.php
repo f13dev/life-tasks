@@ -71,7 +71,7 @@ class Tasks
     public function _tasks_for_period($period)
     {
         $class = 'f13-data-table-'.$period;
-        $v = '<div class="f13-data-header-btn" style="margin-top: 8px;">';
+        $v = '<div class="f13-data-header-btn">';
             $v .= \F13_popup(array(
                 'class_list' => 'f13-data-header-btn-new',
                 'label' => '',

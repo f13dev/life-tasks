@@ -71,11 +71,10 @@ class Tasks
     public function _tasks_for_period($period)
     {
         $class = 'f13-data-table-'.$period;
-        return \F13_table(array(
-            'class_name' => $class,
-            'data' => $this->data->{$period},
-            'head' => \F13_popup(array(
-                'label' => '<span class="dashicons dashicons-plus-alt life-tasks-btn-new"></span>',
+        $v = '<div class="f13-data-header-btn" style="margin-top: 8px;">';
+            $v .= \F13_popup(array(
+                'class_list' => 'f13-data-header-btn-new',
+                'label' => '',
                 'title' => $this->label_new_task,
                 'class_name' => 'f13-life-tasks-edit-task',
                 'attr' => array(
@@ -84,7 +83,12 @@ class Tasks
                     'user' => get_current_user_id(),
                     'token' => wp_create_nonce('new-task'),
                 ),
-            )),
+            ));
+        $v .= '</div>';
+        $v .= \F13_table(array(
+            'class_name' => $class,
+            'data' => $this->data->{$period},
+            'head' => '',
             'progress' => 'signed_user_login',
             'columns' => array(
                 array(
@@ -136,6 +140,8 @@ class Tasks
             'title' => __(ucfirst(esc_attr($period)).' tasks', 'f13-life-dms'),
             'table_id' => 'f13-life-tasks-'.esc_attr($period),
         ));
+
+        return $v;
     }
 
     public function callback_actions($row)

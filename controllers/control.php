@@ -46,6 +46,10 @@ class Control
 
     public function tasks()
     {
+        if (!get_current_user_id()) {
+            wp_die('<div class="f13-notice f13-notice-error " style="">Your user account does not have permissions for this function.</div>');
+        }
+        
         $user_id = filter_input($this->request_method, 'user_id');
         if (empty($user_id)) {
             $user_id = get_current_user_id();

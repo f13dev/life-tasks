@@ -161,3 +161,12 @@
     visibility:hidden;
   }
 }
+
+#life-tasks-user-select {
+  margin-top: 20px;
+}
+
+.dark #life-tasks-user-select {
+  background: #343D4E;
+  color: #fff;
+}

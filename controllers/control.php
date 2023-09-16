@@ -14,10 +14,12 @@ class Control
 
     public function menu($items) 
     {
-        $items['tasks'] = array(
-            'title' => __('Tasks', 'life-tasks'),
-            'url' => site_url().'/tasks/',
-        );
+        if (get_current_user_id()) {
+            $items['tasks'] = array(
+                'title' => __('Tasks', 'life-tasks'),
+                'url' => site_url().'/tasks/',
+            );
+        }
 
         return $items;
     }

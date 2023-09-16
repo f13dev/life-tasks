@@ -9,7 +9,18 @@ class Control
         $this->request_method = ($_SERVER['REQUEST_METHOD'] === 'POST') ? INPUT_POST : INPUT_GET;
         add_filter('f13-life-header-cards', array($this, 'task_stats'), 10, 1);
         add_shortcode('life-tasks', array($this, 'tasks'));
+        add_filter('f13-life-header-pages', array($this, 'menu'), 50, 1);
     }  
+
+    public function menu($items) 
+    {
+        $items['tasks'] = array(
+            'title' => __('Tasks', 'life-tasks'),
+            'url' => site_url().'/tasks/',
+        );
+
+        return $items;
+    }
 
     public function task_stats($arr)
     {

@@ -2,6 +2,8 @@
 
 class Report
 {
+    public $request_method;
+    
     public function __construct()
     {
         $this->request_method = ($_SERVER['REQUEST_METHOD'] === 'POST') ? INPUT_POST : INPUT_GET;

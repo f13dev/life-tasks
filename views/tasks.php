@@ -22,10 +22,18 @@ class Tasks
     public $label_reset_confirm;
     public $label_reset_title;
     public $label_save;
+    public $label_sign;
     public $label_signed;
     public $label_task;
     public $label_user;
     public $label_weekly;
+    public $data;
+    public $user_id;
+    public $task;
+    public $frequency;
+    public $user;
+    public $msg;
+    public $contain;
 
     public function __construct($params = array())
     {
@@ -49,6 +57,7 @@ class Tasks
         $this->label_reset_confirm  = __('Do you really want to reset this tasks completion?', 'life-tasks');
         $this->label_reset_title    = __('Reset completion', 'life-tasks');
         $this->label_save           = __('Save', 'life-tasks');
+        $this->label_sign           = __('Sign', 'life-tasks');
         $this->label_signed         = __('Signed', 'life-tasks');
         $this->label_task           = __('Task', 'life-tasks');
         $this->label_user           = __('User', 'life-tasks');
@@ -122,7 +131,7 @@ class Tasks
                 array(
                     'col' => 'update',
                     'db' => '',
-                    'title' => '',
+                    'title' => $this->label_sign,
                     'callback' => array($this, 'callback_update'),
                     'width' => '100px',
                 ),

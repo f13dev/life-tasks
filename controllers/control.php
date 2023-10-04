@@ -6,7 +6,7 @@ class Control
 
     public function __construct()
     {
-        $this->request_method = ($_SERVER['REQUEST_METHOD'] === 'POST') ? INPUT_POST : INPUT_GET;
+        $this->request_method = (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') ? INPUT_POST : INPUT_GET;
         add_filter('f13-life-header-cards', array($this, 'task_stats'), 10, 1);
         add_shortcode('life-tasks', array($this, 'tasks'));
         add_filter('f13-life-header-pages', array($this, 'menu'), 50, 1);

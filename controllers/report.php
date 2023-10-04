@@ -6,7 +6,7 @@ class Report
     
     public function __construct()
     {
-        $this->request_method = ($_SERVER['REQUEST_METHOD'] === 'POST') ? INPUT_POST : INPUT_GET;
+        $this->request_method = (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') ? INPUT_POST : INPUT_GET;
         add_shortcode('life-tasks-report', array($this, 'report'));
     }
 
